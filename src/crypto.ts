@@ -1,5 +1,5 @@
-import { encode } from "@session.js/mnemonic";
 import { getKeysFromSeed } from "@session.js/keypair";
+import { encode } from "@session.js/mnemonic";
 
 /**
  * Deterministically derives a Session messenger account from 12 digits.
