@@ -279,15 +279,17 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="sec-head">◈ MY FINAL TAKE</div>
   <div class="sec-body">
     <div class="final-take">
-      <p>I've been a gamer since I was 7 years old. Seeing GTA 6 — a game I've loved and watched grow up alongside me — leak like this hits different. It's both exciting and heartbreaking at the same time. Exciting because the game looks incredible, more realistic and ambitious than anything I imagined as a kid. Heartbreaking because I had to see it through a leak.</p>
+      <p>Ok so here is the thing. I have been playing games since i was like 7 years old and when i saw GTA 6 through the leaks man i dont know how to feel. On one side this game looks insane, like the graphics and everything its what i always dreamed about since i was a kid. But on the other side its sad that this is how we had to see it. Through a leak. Not an official trailer or nothing.</p>
 
-      <p>But through all of this, I learned something I didn't expect. I started digging into <em>how</em> CYBERLEEK operates — the Monero payments, the Session messaging, the PBKDF2 key derivation — and I fell in love with the mechanisms. The way people on the "dark" side use cryptography and privacy tools to stay anonymous, to evade detection, to build systems that are genuinely hard to break — it's fascinating. Not because I condone leaking, but because the <em>engineering</em> is beautiful.</p>
+      <p>But thats not even the craziest part. I went to CYBERLEEK website out of curiosity and i was like wait how does this guy even contact people privately? Like nobody knows who he is. So i started digging into the javascript code and thats when i fell into a rabbit hole. Monero, Session, PBKDF2, mnemonic seeds, key derivation... i didnt know any of this stuff before.</p>
 
-      <p>This project is my attempt to understand it. I wanted to see if I could reverse-engineer the contact system from the website's JavaScript bundle and rebuild it from scratch. Most of this was built with AI assistance, but I made sure I actually learned how each piece works — the PBKDF2 derivation, the mnemonic encoding, the Monero privacy layer, the Session keypair generation. I still have questions, which is why I created the FAQ section above — those were the real questions I had after visiting CYBERLEEK's site.</p>
+      <p>The way people on this side of the internet use cryptography to stay hidden is honestly impressive. I'm not saying leaking games is right but the way the whole contact system works? Thats some serious engineering. Three layers of privacy working together and you dont even need to trust anyone because the math does all the work.</p>
 
-      <p>I'm still learning. The code might need improvements. If you spot something wrong or have suggestions, I'm more than happy to take comments and feedback. This is a proof of concept — a learning exercise — not a production system.</p>
+      <p>This whole project is basically me trying to understand how it works. I built most of it with AI help but i made sure i actually understand what each part does. The PBKDF2 stuff, how monero hides the amounts, how session keys are generated from a seed. I even made an FAQ section up there because those were literally the questions i had when i first checked out the site.</p>
 
-      <p style="color: var(--green); margin-top: 16px;">&mdash; henokyehulu</p>
+      <p>I'm still learning how to code so this project probably needs improvements. If you see something wrong or have ideas feel free to open an issue or whatever. I'm happy to learn.</p>
+
+      <p style="color: var(--green); margin-top: 16px;">Peace</p>
     </div>
   </div>
 </div>
