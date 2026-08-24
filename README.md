@@ -1,85 +1,50 @@
-# CYBERLEEK Contact System — Proof of Concept
+# CYBERLEEK Contact System
 
-A browser-based proof-of-concept that replicates [CYBERLEEK](https://cyberleek.net)'s secure contact system. Demonstrates how three independent privacy layers (PBKDF2, Monero, Session) combine to create anonymous, verifiable communication channels.
+A proof of concept showing how CYBERLEEK's secure contact system works. I reverse-engineered the contact mechanism from their website's JavaScript bundle and rebuilt it from scratch using Vite and TypeScript.
 
 **Live Demo:** https://henokyehulu.github.io/cyberleek-contact-system/
 
-## What This Does
+## What is this?
 
-The page has two panels:
+So basically CYBERLEEK has this system where people can contact him privately through Session messenger. The way it works is you generate some digits, send him Monero with those digits in the amount, and he uses those same digits to find your Session account and message you. I thought that was pretty cool so I tried to understand how it all works and built this.
 
-**Sender Side** — Click "Generate" to create a unique 12-digit ID and derive a Session messenger account (13-word mnemonic + Session ID) from it via PBKDF2. The XMR amount is displayed as `400.{digits}`.
+## How it works (in simple terms)
 
-**CYBERLEEK Side** — Input the 12 digits from a Monero payment to derive the same mnemonic and Session ID. This is how CYBERLEEK recovers the sender's Session account to initiate a conversation.
+1. You click "Generate" and it creates 12 random digits
+2. Those digits go through something called PBKDF2 which is basically a really slow math function (100 million iterations) that turns the digits into a Session account
+3. You get a 13-word recovery password and a Session ID
+4. You send exactly `400.{digits}` XMR to CYBERLEEK's address
+5. Monero hides the amount you sent so nobody else can see those 12 digits
+6. CYBERLEEK takes the digits from your payment, runs the same math, and gets your Session account
+7. He messages you on Session
 
-Both panels run the same deterministic derivation — the same 12 digits always produce the same mnemonic and Session ID.
+The whole thing is deterministic which means the same 12 digits always give you the same Session account. That's how both sides end up on the same account without ever talking to each other.
 
-## How It Works
+## The two panels
 
-1. **Key Derivation (PBKDF2)** — 12 random digits are fed into PBKDF2 (HMAC-SHA256, 100M iterations) with the password `cyberleek` as the key. This produces a 128-bit seed. The slow iteration count (~10-15s in-browser) prevents brute-force attacks.
+**Sender Side** — This is what you see. Click generate, get your mnemonic, Session ID, and XMR amount.
 
-2. **Session Account** — The seed is encoded into a 13-word mnemonic using Session.js. From the same seed, an ed25519 keypair is generated and converted to x25519, producing a unique Session ID (`05`-prefixed).
+**CYBERLEEK Side** — This is what CYBERLEEK does on his end. He puts in the 12 digits from your payment and derives your account.
 
-3. **Monero Privacy** — The sender pays `400.{digits}` XMR. Monero's Ring Confidential Transactions hide the amount on-chain. Only CYBERLEEK (who holds the one-time stealth address key) can decrypt the actual amount and extract the 12 digits.
-
-4. **Deterministic Derivation** — CYBERLEEK runs the same PBKDF2 function on the extracted digits. Both sides arrive at the same Session account without ever communicating.
-
-## Tech Stack
-
-- [Vite](https://vitejs.dev/) — build tool
-- TypeScript — strict type checking
-- [Session.js](https://github.com/oxen-io/session-v2/tree/main/packages/session.js) — mnemonic encoding and keypair derivation
-- Web Crypto API — PBKDF2 key derivation (no external crypto dependencies)
-- GitHub Actions — automatic deployment to GitHub Pages
-
-## Getting Started
+## Running it yourself
 
 ```bash
-# Install dependencies
 pnpm install
-
-# Start dev server
 pnpm dev
-
-# Build for production
-pnpm build
-
-# Preview production build
-pnpm preview
 ```
 
-## Project Structure
+That's it. Open the localhost URL it gives you.
 
-```
-src/
-  crypto.ts    — PBKDF2 derivation, mnemonic encoding, Session ID generation
-  main.ts      — UI (both panels in a single page)
-  style.css    — dark cyberpunk theme
-index.html     — entry point
-.github/
-  workflows/
-    deploy.yml — GitHub Actions deployment to GitHub Pages
-```
+## What I learned building this
 
-## Page Sections
+- How PBKDF2 key derivation works (and why 100 million iterations takes 15 seconds)
+- How Monero hides transaction amounts using RingCT
+- How Session generates accounts from a seed using ed25519/x25519 keypairs
+- How to reverse-engineer minified JavaScript
 
-- **Sender Side** — Generate mnemonic, Session ID, and XMR amount
-- **CYBERLEEK Side** — Input 12 digits to derive the same mnemonic + Session ID
-- **How Does This Actually Work?** — 5-step technical explanation of the system
-- **FAQ** — 10 common questions about the secure contact mechanism
-- **My Final Take** — Personal note from the creator
+## FAQ
 
-## Security Notes
-
-- The PBKDF2 password (`cyberleek`) and iteration count are public — they are hardcoded in the original site's JavaScript bundle.
-- The 12 digits are the only secret linking the XMR payment to the Session account.
-- Monero's RingCT hides the amount on the blockchain — no observer can see the digits.
-- Session provides end-to-end encrypted messaging with no central server.
-- This is a proof-of-concept for educational purposes only.
-
-## Contributing
-
-Feel free to open issues or submit pull requests. The code is a learning exercise and improvements are welcome.
+There's a FAQ section on the page itself with 10 common questions I had while building this. Things like "can someone see my digits on the blockchain" and "what if I send from an exchange."
 
 ## License
 
