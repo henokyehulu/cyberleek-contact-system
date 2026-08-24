@@ -2,6 +2,8 @@
 
 A browser-based proof-of-concept that replicates [CYBERLEEK](https://cyberleek.net)'s secure contact system. Demonstrates how three independent privacy layers (PBKDF2, Monero, Session) combine to create anonymous, verifiable communication channels.
 
+**Live Demo:** https://henokyehulu.github.io/cyberleek-contact-system/
+
 ## What This Does
 
 The page has two panels:
@@ -28,6 +30,7 @@ Both panels run the same deterministic derivation — the same 12 digits always 
 - TypeScript — strict type checking
 - [Session.js](https://github.com/oxen-io/session-v2/tree/main/packages/session.js) — mnemonic encoding and keypair derivation
 - Web Crypto API — PBKDF2 key derivation (no external crypto dependencies)
+- GitHub Actions — automatic deployment to GitHub Pages
 
 ## Getting Started
 
@@ -53,7 +56,18 @@ src/
   main.ts      — UI (both panels in a single page)
   style.css    — dark cyberpunk theme
 index.html     — entry point
+.github/
+  workflows/
+    deploy.yml — GitHub Actions deployment to GitHub Pages
 ```
+
+## Page Sections
+
+- **Sender Side** — Generate mnemonic, Session ID, and XMR amount
+- **CYBERLEEK Side** — Input 12 digits to derive the same mnemonic + Session ID
+- **How Does This Actually Work?** — 5-step technical explanation of the system
+- **FAQ** — 10 common questions about the secure contact mechanism
+- **My Final Take** — Personal note from the creator
 
 ## Security Notes
 
@@ -62,6 +76,10 @@ index.html     — entry point
 - Monero's RingCT hides the amount on the blockchain — no observer can see the digits.
 - Session provides end-to-end encrypted messaging with no central server.
 - This is a proof-of-concept for educational purposes only.
+
+## Contributing
+
+Feel free to open issues or submit pull requests. The code is a learning exercise and improvements are welcome.
 
 ## License
 
