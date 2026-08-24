@@ -1,0 +1,373 @@
+:root {
+  --bg: #00050d;
+  --card: #001664;
+  --border: #003299;
+  --neon: #0064ec;
+  --neon-dim: #0050b8;
+  --neon-glow: rgba(0, 100, 236, 0.25);
+  --green: #60c33a;
+  --green-dim: #4a9a2c;
+  --green-glow: rgba(96, 195, 58, 0.25);
+  --red: #ff3355;
+  --text: #a0b0c8;
+  --text-bright: #d6efc1;
+  --text-dim: #6a7a90;
+  --text-dark: #3a4a60;
+  --amber: #fbbf24;
+  --amber-dim: #b45309;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Courier New", "Lucida Console", Monaco, monospace;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+#app {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 16px;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .page-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sec-drop {
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.sec-head {
+  padding: 10px 16px;
+  font-size: 0.9em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--green);
+  border-bottom: 1px solid var(--border);
+}
+
+.sec-body {
+  padding: 14px 16px;
+}
+
+.faq-q {
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.faq-a p {
+  margin-bottom: 8px;
+}
+
+.info-box {
+  border: 1px solid var(--neon);
+  background: rgba(0, 100, 236, 0.05);
+  padding: 14px;
+  margin-top: 14px;
+  font-size: 0.85em;
+  color: var(--text);
+  line-height: 1.9;
+}
+
+.info-box strong {
+  color: var(--text-bright);
+}
+
+.label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.info-label {
+  font-size: 0.72em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.btn {
+  background: transparent;
+  border: 1px solid var(--neon);
+  color: var(--neon);
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--neon-glow);
+  box-shadow: 0 0 12px var(--neon-glow);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.input-row input {
+  flex: 1;
+  background: #00050d;
+  border: 1px solid var(--border);
+  color: var(--green);
+  font-family: monospace;
+  font-size: 1.1em;
+  padding: 8px 12px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.input-row input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 10px var(--green-glow);
+}
+
+.input-row input::placeholder {
+  color: var(--text-dark);
+  letter-spacing: 1px;
+  font-size: 0.85em;
+}
+
+.mnemonic-box {
+  border: 1px solid var(--amber-dim);
+  padding: 10px;
+  background: #00050d;
+  margin: 10px 0;
+  font-family: monospace;
+  color: var(--amber);
+  user-select: all;
+  word-break: break-all;
+}
+
+.xmr-amount {
+  border: 1px solid var(--green);
+  padding: 10px;
+  text-align: center;
+  background: #00050d;
+  color: var(--green);
+  font-weight: bold;
+  font-family: monospace;
+}
+
+.xmr-address {
+  border: 1px solid var(--border);
+  padding: 10px;
+  background: #00050d;
+  color: var(--neon);
+  font-family: monospace;
+  font-size: 0.85em;
+  word-break: break-all;
+  user-select: all;
+}
+
+.session-id-box {
+  border: 1px solid var(--green);
+  padding: 10px;
+  background: #00050d;
+  margin: 10px 0;
+  font-family: monospace;
+  color: var(--green);
+  user-select: all;
+  word-break: break-all;
+  font-size: 0.9em;
+}
+
+.spinner {
+  border: 3px solid var(--border);
+  border-top: 3px solid var(--green);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+a {
+  color: var(--neon);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  background: #00102b;
+}
+
+.faq-question {
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 0.9em;
+  color: var(--text-bright);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question::after {
+  content: "+";
+  color: var(--green);
+  font-size: 1.2em;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.faq-item[open] .faq-question::after {
+  content: "\2212";
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question:hover {
+  background: rgba(96, 195, 58, 0.04);
+}
+
+.faq-answer {
+  padding: 0 16px 14px 16px;
+  font-size: 0.88em;
+  line-height: 1.9;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+}
+
+.faq-answer strong {
+  color: var(--text-bright);
+}
+
+.faq-answer code {
+  background: rgba(0, 100, 236, 0.15);
+  padding: 2px 6px;
+  font-size: 0.9em;
+  color: var(--neon);
+  border: 1px solid rgba(0, 100, 236, 0.3);
+}
+
+.faq-answer em {
+  color: var(--green);
+  font-style: normal;
+}
+
+.final-take p {
+  font-size: 0.92em;
+  line-height: 2;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.final-take strong {
+  color: var(--text-bright);
+}
+
+.final-take em {
+  color: var(--green);
+  font-style: normal;
+}
+
+.steps-grid {
+  display: grid;
+  gap: 0;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.step:last-child {
+  border-bottom: none;
+}
+
+.step-num {
+  font-size: 2em;
+  font-weight: 900;
+  color: var(--green);
+  opacity: 0.3;
+  line-height: 1;
+  min-width: 50px;
+}
+
+.step-body h3 {
+  color: var(--text-bright);
+  font-size: 1em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.step-body p {
+  font-size: 0.88em;
+  line-height: 1.9;
+  color: var(--text-dim);
+}
+
+.step-body strong {
+  color: var(--text-bright);
+}
+
+.step-body code {
+  background: rgba(0, 100, 236, 0.15);
+  padding: 2px 6px;
+  font-size: 0.9em;
+  color: var(--neon);
+  border: 1px solid rgba(0, 100, 236, 0.3);
+}
+
+.step-body em {
+  color: var(--green);
+  font-style: normal;
+}
+
+@media (max-width: 480px) {
+  .step-num {
+    font-size: 1.4em;
+    min-width: 36px;
+  }
+}
